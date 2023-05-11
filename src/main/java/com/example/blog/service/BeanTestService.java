@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Slf4j
-@Service
+//@Service
 public class BeanTestService {
     public void log() {
         log.info("log test...");

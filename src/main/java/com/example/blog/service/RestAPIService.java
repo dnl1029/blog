@@ -1,6 +1,8 @@
 package com.example.blog.service;
 
 import com.example.blog.dto.DataDto;
+import com.example.blog.dto.PostReturnDto;
+import com.example.blog.dto.PostTestDto;
 import com.example.blog.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -62,4 +64,46 @@ public class RestAPIService {
         }
         return result;
     }
+
+    public ResponseEntity<PostReturnDto> postRestTemplateMethod(PostTestDto postTestDto) {
+
+        String url = "https://reqres.in/api/users";
+
+        ResponseEntity<PostReturnDto> postReturnDtoResponseEntity = null;
+        try {
+            long startTime = System.currentTimeMillis();
+            postReturnDtoResponseEntity = restTemplate.postForEntity(url, postTestDto, PostReturnDto.class);
+            long endTime = System.currentTimeMillis();
+            long elapsedTime = endTime - startTime;
+
+            log.info("statusCode : {}", postReturnDtoResponseEntity.getStatusCode());
+            log.info("getBody : {}", postReturnDtoResponseEntity.getBody());
+            log.info("elapsedTime = {}", elapsedTime);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+
+        return postReturnDtoResponseEntity;
+    }
+
+    public ResponseEntity<PostReturnDto> postFeignMethod(PostTestDto postTestDto) {
+
+        ResponseEntity<PostReturnDto> postReturnDtoResponseEntity = null;
+        try {
+            long startTime = System.currentTimeMillis();
+            postReturnDtoResponseEntity = feignClient.postFeignData(postTestDto);
+            long endTime = System.currentTimeMillis();
+            long elapsedTime = endTime - startTime;
+
+            log.info("statusCode : {}", postReturnDtoResponseEntity.getStatusCode());
+            log.info("getBody : {}", postReturnDtoResponseEntity.getBody());
+            log.info("elapsedTime = {}", elapsedTime);
+
+        }
+        catch (Exception e){
+            log.error(e.getMessage(), e);
+        }
+        return postReturnDtoResponseEntity;
+    }
+    
 }

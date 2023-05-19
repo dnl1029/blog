@@ -5,10 +5,13 @@ import com.example.blog.dto.PostTestDto;
 import com.example.blog.dto.RestAPITestDto;
 import com.example.blog.dto.UserDto;
 import com.example.blog.service.RestAPIService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @RestController
 @RequestMapping("api")
@@ -72,11 +75,19 @@ public class RestAPIController {
         return "ok";
     }
 
+//    @PostMapping("RequestBody/test2")
+//    public String postRequestBody(@RequestBody RestAPITestDto restAPITestDto, HttpServletRequest httpServletRequest) {
+//        log.info("postRequestBody log / first param : {}, second param : {}",restAPITestDto.getFirst(), restAPITestDto.getSecond());
+//        log.info("url : {}",httpServletRequest.getRequestURL());
+//        return "ok";
+//    }
     @PostMapping("RequestBody/test2")
     public String postRequestBody(@RequestBody RestAPITestDto restAPITestDto) {
         log.info("postRequestBody log / first param : {}, second param : {}",restAPITestDto.getFirst(), restAPITestDto.getSecond());
+
+        HttpServletRequest servletRequest = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        log.info("log : {}",servletRequest.getRequestURL());
         return "ok";
     }
-
 
 }

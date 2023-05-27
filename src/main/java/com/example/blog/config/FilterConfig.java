@@ -10,7 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Slf4j
-@Configuration
+//test후 빈등록 제거
+//@Configuration
 public class FilterConfig {
 
     @Bean

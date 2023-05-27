@@ -6,7 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Configuration
+//test후 bean등록 제거
+//@Configuration
 @RequiredArgsConstructor
 public class InterceptorConfig implements WebMvcConfigurer {
 

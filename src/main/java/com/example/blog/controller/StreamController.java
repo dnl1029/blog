@@ -1,2 +1,4 @@
-package com.example.blog.controller;public class StreamController {
+package com.example.blog.controller;
+
+public class StreamController {
 }

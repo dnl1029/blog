@@ -22,7 +22,8 @@ public class FilterConfig {
         return filterFilterRegistrationBean;
     }
 
-    @Bean
+    // MyRequestBodyAdviceAdapter 적용을 위해 주석처리
+//    @Bean
     public FilterRegistrationBean<Filter> authorizationFilter() {
         FilterRegistrationBean<Filter> filterFilterRegistrationBean = new FilterRegistrationBean<>();
         filterFilterRegistrationBean.setFilter(new AuthorizationFilter());

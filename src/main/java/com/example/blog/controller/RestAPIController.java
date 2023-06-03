@@ -1,9 +1,6 @@
 package com.example.blog.controller;
 
-import com.example.blog.dto.PostReturnDto;
-import com.example.blog.dto.PostTestDto;
-import com.example.blog.dto.RestAPITestDto;
-import com.example.blog.dto.UserDto;
+import com.example.blog.dto.*;
 import com.example.blog.service.RestAPIService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -87,6 +84,12 @@ public class RestAPIController {
 
         HttpServletRequest servletRequest = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         log.info("log : {}",servletRequest.getRequestURL());
+        return "ok";
+    }
+
+    @PostMapping("apikey/test")
+    public String apiKeyTest(@RequestBody ApiKeyDto apiKeyDto) {
+        log.info("RestAPIController. apiKeyDto : {}",apiKeyDto);
         return "ok";
     }
 

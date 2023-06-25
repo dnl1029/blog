@@ -1,6 +1,14 @@
 server:
   shutdown: GRACEFUL
 
+#Mybatis Configuration
+mybatis:
+  mapper-locations: META-INF/mybatis/mappers/*.xml #query가 들어가있는 xml파일 위치 지정
+  configuration:
+    map-underscore-to-camel-case : true #DB에서 USER_ID -> userId로 DB 컬럼명과 Java 변수명 자동변환
+    jdbc-type-for-null: 'NULL' #mybatis로 넘어온 값이 null인 경우에 jdbctype값. 쿼리조건에 null 넣고 싶을때 사용
+    call-setters-on-nulls: true #쿼리 수행 후 가져온 값이 null인 경우, 응답으로 null을 세팅해줄지 말지 여부
+
 spring:
   lifecycle:
     timeout-per-shutdown-phase: 40s #디폴트값은 30초
@@ -8,3 +16,8 @@ spring:
     mongodb:
 #      uri: mongodb+srv://admin:내암호@cluster0.1p17esk.mongodb.net/sample_airbnb
       uri: ENC(1kiaGE3RJMoGZi9TFdjEj4IxeCJyofdL9i5bpvbN+N5pidF/5WUuNeDhGCLTXgQHUpFxFC2P1uOaEDDWv5OdLwiNVw2FT3mFNr4pB73Nb5E=)
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:tcp://localhost/~/test
+    username: sa
+    password:

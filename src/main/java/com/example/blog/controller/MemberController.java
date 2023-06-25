@@ -3,6 +3,8 @@ package com.example.blog.controller;
 import com.example.blog.dto.MemberDto;
 import com.example.blog.service.JwtIssueService;
 import com.example.blog.service.MemberService;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +32,15 @@ public class MemberController {
         String jwt = jwtIssueService.createJwt(memberDto);
         log.info("jwt token : {}",jwt);
         return jwt;
+    }
+
+    @GetMapping("jwt/claims")
+    public String getClaims(String jwt) {
+        Jws<Claims> claims = jwtIssueService.getClaims(jwt);
+        log.info("userId = {},",claims.getBody().get("userId"));
+        log.info("name = {},",claims.getBody().get("name"));
+        log.info("password = {},",claims.getBody().get("password"));
+        return "ok";
     }
 
     // MemberController 내 범위에서 RuntimeException 발생하면, runtimeHandler가 처리한다.

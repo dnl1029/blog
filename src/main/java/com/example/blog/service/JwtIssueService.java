@@ -1,9 +1,7 @@
 package com.example.blog.service;
 
 import com.example.blog.dto.MemberDto;
-import io.jsonwebtoken.Header;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import jakarta.xml.bind.DatatypeConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -74,6 +72,16 @@ public class JwtIssueService {
     private Key createSignature() {
         byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(jwtSecretKey);
         return new SecretKeySpec(apiKeySecretBytes, SignatureAlgorithm.HS256.getJcaName());
+    }
+
+    public Jws<Claims> getClaims(String jwt) {
+        try{
+            return Jwts.parser().setSigningKey(jwtSecretKey).parseClaimsJws(jwt);
+        }
+        catch (SignatureException e){
+            log.info(e.getMessage());
+            return null;
+        }
     }
 
 }

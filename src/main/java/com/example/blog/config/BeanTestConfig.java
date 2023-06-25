@@ -9,7 +9,8 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 public class BeanTestConfig {
     @Qualifier("manualService")
-    @Bean("manualService")
+//    @Bean(name = "manualService",initMethod = "init",destroyMethod = "destory")
+    @Bean(name = "manualService")
     public BeanTestService beanTestService() {
         return new BeanTestService();
     }

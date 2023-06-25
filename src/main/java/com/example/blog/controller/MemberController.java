@@ -5,10 +5,9 @@ import com.example.blog.service.JwtIssueService;
 import com.example.blog.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.concurrent.TimeoutException;
 
 @RequestMapping("api/v1")
 @RestController
@@ -31,6 +30,13 @@ public class MemberController {
         String jwt = jwtIssueService.createJwt(memberDto);
         log.info("jwt token : {}",jwt);
         return jwt;
+    }
+
+    // MemberController 내 범위에서 RuntimeException 발생하면, runtimeHandler가 처리한다.
+    @ExceptionHandler(value = RuntimeException.class)
+    public Object runtimeHandler(Exception e) {
+        log.info(e.getMessage());
+        return "id/password 인증에 실패했습니다.";
     }
 
 }

@@ -23,7 +23,11 @@ public class MemberService {
 
         paramMap.put("USER_ID",memberDto.getUserId());
         paramMap.put("PASSWORD",memberDto.getPassword());
+
         MemberDto result = memberMapper.findMemberByMap(paramMap);
+        if(result == null) {
+            throw new RuntimeException();
+        }
         return result;
     }
 

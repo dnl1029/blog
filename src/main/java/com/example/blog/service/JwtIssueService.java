@@ -35,7 +35,7 @@ public class JwtIssueService {
 
         if(result == null) {
             log.info("login failed. id:{},password:{}",memberDto.getUserId(),memberDto.getPassword());
-            return null;
+            throw new RuntimeException();
         }
         else {
             return Jwts.builder()

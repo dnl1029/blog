@@ -1,4 +1,9 @@
+server:
+  shutdown: GRACEFUL
+
 spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 40s #디폴트값은 30초
   data:
     mongodb:
 #      uri: mongodb+srv://admin:내암호@cluster0.1p17esk.mongodb.net/sample_airbnb

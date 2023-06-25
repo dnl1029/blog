@@ -22,4 +22,10 @@ public class BeanTestService {
     public void destory() {
         log.info("BeanTestService destroy...");
     }
+    
+    public void gracefulTest() throws InterruptedException {
+        log.info("graceful test 시작");
+        Thread.sleep(10000);
+        log.info("graceful test 종료");
+    }
 }

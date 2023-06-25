@@ -57,5 +57,9 @@ public class BeanTestController {
         myService.mylog();
     }
 
+    @GetMapping("graceful/test")
+    public void gracefulShutdownTest() throws InterruptedException {
+        service.gracefulTest();
+    }
 
 }

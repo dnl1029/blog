@@ -37,11 +37,20 @@ public class MemberController {
     @GetMapping("jwt/claims")
     public String getClaims(String jwt) {
         Jws<Claims> claims = jwtIssueService.getClaims(jwt);
-        log.info("userId = {},",claims.getBody().get("userId"));
-        log.info("name = {},",claims.getBody().get("name"));
-        log.info("password = {},",claims.getBody().get("password"));
+        log.info("userId : {},",claims.getBody().get("userId"));
+        log.info("name : {}",claims.getBody().get("name"));
+        //log.info("password = {},",claims.getBody().get("password"));
+        log.info("Expired Date : {}",claims.getBody().getExpiration());
         return "ok";
     }
+
+    @GetMapping("jwt/valid/check")
+    public boolean checkValid(String jwt) {
+        boolean b = jwtIssueService.tokenValidCheck(jwt);
+        log.info("validation check : {}",b);
+        return  b;
+    }
+
 
     // MemberController 내 범위에서 RuntimeException 발생하면, runtimeHandler가 처리한다.
     @ExceptionHandler(value = RuntimeException.class)

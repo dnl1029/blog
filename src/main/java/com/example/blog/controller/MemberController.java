@@ -7,9 +7,10 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.concurrent.TimeoutException;
+import java.util.UUID;
 
 @RequestMapping("api/v1")
 @RestController
@@ -29,8 +30,12 @@ public class MemberController {
 
     @GetMapping("jwt/issue")
     public String getJwtToken(@ModelAttribute MemberDto memberDto) {
+        final UUID uuid = UUID.randomUUID();
+        MDC.put("uuid", uuid.toString());
+
         String jwt = jwtIssueService.createJwt(memberDto);
         log.info("jwt token : {}",jwt);
+        MDC.clear();
         return jwt;
     }
 
@@ -56,7 +61,7 @@ public class MemberController {
     @ExceptionHandler(value = RuntimeException.class)
     public Object runtimeHandler(Exception e) {
         log.info(e.getMessage());
-        return "id/password 인증에 실패했습니다.";
+        return "인증에 실패했습니다.";
     }
 
 }

@@ -5,6 +5,7 @@ import io.jsonwebtoken.*;
 import jakarta.xml.bind.DatatypeConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,8 @@ public class JwtIssueService {
     public String createJwt(MemberDto memberDto) {
         Date now = new Date();
         MemberDto result = memberService.getMemberByDto(memberDto);
+
+        log.info("MDC UUID : {}", MDC.get("uuid"));
 
         if(result == null) {
             log.info("login failed. id:{},password:{}",memberDto.getUserId(),memberDto.getPassword());

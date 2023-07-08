@@ -28,11 +28,12 @@ public class SecurityConfiguration{
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                         .anyRequest().authenticated()	// 어떠한 요청이라도 인증필요
                 )
-                .formLogin(login -> login	// form 방식 로그인 사용
-                        .defaultSuccessUrl("/swagger-ui/index.html", true)
-                        .permitAll()
-                )
-                .logout(withDefaults());	// 로그아웃은 기본설정으로 (/logout으로 인증해제)
+//                .formLogin(login -> login	// form 방식 로그인 사용
+//                        .defaultSuccessUrl("/swagger-ui/index.html", true)
+//                        .permitAll()
+//                )
+//                .logout(withDefaults());	// 로그아웃은 기본설정으로 (/logout으로 인증해제)
+                .httpBasic();
 
         return http.build();
     }

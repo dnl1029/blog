@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 
 @Slf4j
-@ControllerAdvice(annotations = RestController.class)
+//@ControllerAdvice(annotations = RestController.class)
 public class MyRequestBodyAdviceAdapter extends RequestBodyAdviceAdapter {
 
     //springMVC가 RequestBody를 읽은 후 실행되는 Method. 여기서 Object가 Controller에서 @RequestBody로 받는 객체를 의미

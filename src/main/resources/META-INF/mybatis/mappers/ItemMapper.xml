@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.blog.jpa.ItemMapper">
+
+    <select id="findAll" resultType="com.example.blog.jpa.Item">
+        SELECT *
+        FROM ITEM
+    </select>
+
+    <select id="findById" parameterType="java.util.LinkedHashMap" resultType="com.example.blog.jpa.Item">
+        SELECT *
+        FROM ITEM
+        WHERE 1=1
+        AND ID = #{ID}
+    </select>
+
+    <select id="existsById" parameterType="java.util.LinkedHashMap" resultType="boolean">
+        SELECT DISTINCT
+        (CASE WHEN EXISTS ( SELECT 1 FROM ITEM WHERE ID = #{ID}) THEN 1
+        ELSE 0 END)
+        FROM ITEM
+    </select>
+
+    <select id="findByItemName" parameterType="java.util.LinkedHashMap" resultType="com.example.blog.jpa.Item">
+        SELECT *
+        FROM ITEM
+        WHERE 1=1
+        AND ITEM_NAME = #{ITEM_NAME}
+    </select>
+
+    <select id="findByItemNameLike" parameterType="java.util.LinkedHashMap" resultType="com.example.blog.jpa.Item">
+        SELECT *
+        FROM ITEM
+        WHERE 1=1
+<!--        AND ITEM_NAME LIKE CONCAT(‘%’, #{ITEM_NAME}, ‘%’)-->
+        AND ITEM_NAME LIKE '%'||#{ITEM_NAME}||'%'
+    </select>
+
+    <select id="findByPriceLessThanEqual" parameterType="java.util.LinkedHashMap" resultType="com.example.blog.jpa.Item">
+        SELECT *
+        FROM ITEM
+        WHERE 1=1
+        AND PRICE <![CDATA[<=]]> ${PRICE}
+    </select>
+
+    <select id="findByItemNameLikeAndPriceLessThanEqual" parameterType="java.util.LinkedHashMap" resultType="com.example.blog.jpa.Item">
+        SELECT *
+        FROM ITEM
+        WHERE 1=1
+<!--        AND ITEM_NAME LIKE CONCAT(‘%’, #{ITEM_NAME}, ‘%’)-->
+        AND ITEM_NAME LIKE '%'||#{ITEM_NAME}||'%'
+        AND PRICE <![CDATA[<=]]> ${PRICE}
+    </select>
+
+    <insert id="save" parameterType="java.util.LinkedHashMap">
+        INSERT INTO ITEM(ITEM_NAME,PRICE,QUANTITY)
+        VALUES(#{ITEM_NAME},#{PRICE},#{QUANTITY})
+    </insert>
+
+    <update id="update" parameterType="java.util.LinkedHashMap">
+        UPDATE ITEM
+        SET
+        ITEM_NAME = #{ITEM_NAME},
+        PRICE = #{PRICE},
+        QUANTITY = #{QUANTITY}
+        WHERE 1=1
+        AND ID = #{ID}
+    </update>
+
+    <delete id="deleteById" parameterType="java.util.LinkedHashMap">
+        DELETE
+        FROM ITEM
+        WHERE 1=1
+        AND ID = #{ID}
+    </delete>
+
+</mapper>

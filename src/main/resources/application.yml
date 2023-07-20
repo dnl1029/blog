@@ -21,3 +21,10 @@ spring:
     url: jdbc:h2:tcp://localhost/~/test
     username: sa
     password:
+
+custom:
+  value:
+    x: test
+    y: test2
+  value_v2:
+    z: test3

@@ -76,7 +76,7 @@ public class ItemJpaService {
     }
 
     /**
-     * 7. R / findByPriceLessThanEqual()
+     * 7. R / findByItemNameLikeAndPriceLessThanEqual()
      * select i from Item i where i.itemName like ? and i.price <= ?
      * Repository에 별도 선언 필요
      */
